@@ -1,0 +1,43 @@
+<nav>
+  <a routerLink="/inicio" class="btn btn-primary btn-sm">Volver al inicio</a>
+</nav>
+<div class="container mt-5">
+
+  <h2 class="text-center mb-4">Lista de videojuegos</h2>
+
+  @for (videojuego of videojuegos; track videojuego.id) {
+
+    <div class="card mb-4 p-3 mx-auto" style="max-width: 700px;">
+
+      <div class="row">
+
+        <div class="col-md-6">
+          <h5>{{ videojuego.nombre }}</h5>
+
+          <p><strong>Género:</strong> {{ videojuego.genero }}</p>
+          <p><strong>Plataforma:</strong> {{ videojuego.plataforma }}</p>
+
+          @if (videojuego.precio === 0) {
+            <p class="text-success"><strong>Gratis</strong></p>
+          } @else {
+            <p><strong>{{ videojuego.precio | currency }}</strong></p>
+          }
+
+          @if (videojuego.clasificacion === 'M') {
+            <p class="text-danger">+17: No apto para menores</p>
+          } @else if (videojuego.clasificacion === 'T') {
+            <p class="text-warning">+13: Adolescentes</p>
+          } @else if (videojuego.clasificacion === 'E') {
+            <p class="text-success">Apto para todo público</p>
+          } @else if (videojuego.clasificacion === 'E+10') {
+            <p class="text-success">+10 años</p>
+          }
+        </div>
+        <div class="col-md-6">
+          <p><strong>Descripción:</strong></p>
+          <p>{{ videojuego.descripcion }}</p>
+        </div>
+      </div>
+    </div>
+  }
+</div>
