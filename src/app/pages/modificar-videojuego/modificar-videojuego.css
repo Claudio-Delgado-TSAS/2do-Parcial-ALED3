@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 30px 20px;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+}
+
+mat-card-header {
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.acciones {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.error {
+  color: #d32f2f;
+}

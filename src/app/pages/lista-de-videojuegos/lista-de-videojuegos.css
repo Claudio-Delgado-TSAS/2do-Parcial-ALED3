@@ -1,0 +1,62 @@
+.pagina-videojuegos {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.barra-acciones {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.cantidad {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.lista-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.tarjeta-videojuego {
+  height: 100%;
+}
+
+mat-card-header {
+  margin-bottom: 12px;
+}
+
+.acciones-tarjeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+mat-card-header {
+  justify-content: center;
+  text-align: center;
+}
+
+mat-card-title {
+  text-align: center;
+  width: 100%;
+}
+
+.acciones-tarjeta {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}

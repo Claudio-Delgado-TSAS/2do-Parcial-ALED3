@@ -1,0 +1,46 @@
+<div class="container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Iniciar sesión</mat-card-title>
+      <mat-card-subtitle>Ingresá tus datos para continuar</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="formulario" (ngSubmit)="ingresar()">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input matInput type="text" formControlName="usuario">
+
+          @if (formulario.controls.usuario.hasError('required') &&
+               formulario.controls.usuario.touched) {
+            <mat-error>Ingresá tu usuario</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" formControlName="password">
+
+          @if (formulario.controls.password.hasError('required') &&
+               formulario.controls.password.touched) {
+            <mat-error>Ingresá tu contraseña</mat-error>
+          }
+        </mat-form-field>
+
+        @if (errorMensaje) {
+          <p class="error">{{ errorMensaje }}</p>
+        }
+
+        <button mat-raised-button color="primary" type="submit">
+          Ingresar
+        </button>
+
+        <button
+          mat-raised-button type="button" routerLink="/videojuegos">
+          Ver catálogo
+          </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

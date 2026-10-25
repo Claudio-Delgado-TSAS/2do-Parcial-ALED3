@@ -1,9 +1,15 @@
 import { Routes } from '@angular/router';
-import { Inicio } from './pages/inicio/inicio';
-import { ListaDeVideojuegos } from './pages/lista-de-videojuegos/lista-de-videojuegos';
+import { Login } from './auth/login/login';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-  { path: 'inicio', component: Inicio },
-  { path: 'lista', component: ListaDeVideojuegos }
+  { path: '', redirectTo: 'videojuegos', pathMatch: 'full' },
+
+  { path: 'login', component: Login },
+
+  {
+    path: 'videojuegos',
+    loadChildren: () =>
+      import('./videojuegos/videojuegos.routes')
+        .then(m => m.rutaVideojuegos)
+  }
 ];

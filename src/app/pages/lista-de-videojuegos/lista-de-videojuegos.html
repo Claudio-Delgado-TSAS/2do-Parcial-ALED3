@@ -1,43 +1,67 @@
-<nav>
-  <a routerLink="/inicio" class="btn btn-primary btn-sm">Volver al inicio</a>
-</nav>
-<div class="container mt-5">
+<div class="pagina-videojuegos">
 
-  <h2 class="text-center mb-4">Lista de videojuegos</h2>
+  <div class="barra-acciones">
+    @if (authService.estaLogueado()) {
+      <button mat-raised-button (click)="cerrarSesion()">
+        <mat-icon>logout</mat-icon>
+        Cerrar sesión
+      </button>
+    } @else {
+      <a mat-raised-button color="primary" routerLink="/login">
+        <mat-icon>login</mat-icon>
+        Iniciar sesión para ver más detalles
+      </a>
+    }
 
-  @for (videojuego of videojuegos; track videojuego.id) {
+    @if (esAdmin()) {
+      <a mat-raised-button color="primary" routerLink="/videojuegos/agregar">
+        <mat-icon>add</mat-icon>
+        Agregar videojuego
+      </a>
+    }
+  </div>
 
-    <div class="card mb-4 p-3 mx-auto" style="max-width: 700px;">
+  <h2>Catálogo de videojuegos</h2>
 
-      <div class="row">
+  <div class="lista-tarjetas">
+    @for (videojuego of videojuegos(); track videojuego.id) {
+      <mat-card class="tarjeta-videojuego">
+        <mat-card-header>
+          <mat-card-title>{{ videojuego.nombre }}</mat-card-title>
+        </mat-card-header>
 
-        <div class="col-md-6">
-          <h5>{{ videojuego.nombre }}</h5>
+        <mat-card-content>
+          <p>Género: {{ videojuego.genero }}</p>
+          <p>Plataforma: {{ videojuego.plataforma }}</p>
 
-          <p><strong>Género:</strong> {{ videojuego.genero }}</p>
-          <p><strong>Plataforma:</strong> {{ videojuego.plataforma }}</p>
-
-          @if (videojuego.precio === 0) {
-            <p class="text-success"><strong>Gratis</strong></p>
-          } @else {
-            <p><strong>{{ videojuego.precio | currency }}</strong></p>
+          @if (authService.estaLogueado()) {
+            @if (videojuego.precio > 0) {
+             <p>Precio: {{ videojuego.precio | currency:'ARS' }}</p>
+              } @else {
+                <p>Gratis</p>
+              }
+            <p>Descripción: {{ videojuego.descripcion }}</p>
           }
 
-          @if (videojuego.clasificacion === 'M') {
-            <p class="text-danger">+17: No apto para menores</p>
-          } @else if (videojuego.clasificacion === 'T') {
-            <p class="text-warning">+13: Adolescentes</p>
-          } @else if (videojuego.clasificacion === 'E') {
-            <p class="text-success">Apto para todo público</p>
-          } @else if (videojuego.clasificacion === 'E+10') {
-            <p class="text-success">+10 años</p>
+          @if (esAdmin()) {
+            <div class="acciones-tarjeta">
+              <button mat-raised-button color="warn" (click)="eliminar(videojuego.id)">
+                <mat-icon>delete</mat-icon>
+                Eliminar
+              </button>
+
+              <a
+                mat-raised-button
+                color="primary"
+                [routerLink]="['/videojuegos/modificar', videojuego.id]">
+                <mat-icon>edit</mat-icon>
+                Modificar
+              </a>
+            </div>
           }
-        </div>
-        <div class="col-md-6">
-          <p><strong>Descripción:</strong></p>
-          <p>{{ videojuego.descripcion }}</p>
-        </div>
-      </div>
-    </div>
-  }
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+
 </div>
